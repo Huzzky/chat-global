@@ -1,28 +1,22 @@
 import { connect, useDispatch } from 'react-redux'
-import { configConnect2Firebase } from '../../const'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { userAuthSuccess } from '../../store/actions/userAuthSuccess'
 import { memo } from 'react'
-
-// type iResultOfConnectToGoogle = {
-//   result: any
-// }
+import { constAuthUserActions } from '../../../store/actions/constAuthUserActions'
 
 const ConnectToGoole = (): JSX.Element => {
   const dispatch = useDispatch()
-  firebase.initializeApp(configConnect2Firebase)
   let provider = new firebase.auth.GoogleAuthProvider()
   void firebase
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
       void console.log(result.user?.displayName)
-      void dispatch(userAuthSuccess())
+      void constAuthUserActions.authSuccess(dispatch)
     })
-    .catch((error) => {
-      void console.log(error)
-      void dispatch(userAuthSuccess())
+    .catch((_) => {
+      void console.log('error')
+      void constAuthUserActions.authError(dispatch)
     })
 
   return <h1>Происходит вход</h1>

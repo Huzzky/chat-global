@@ -1,7 +1,8 @@
 import { memo } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import ConnectToGoole from './ConnectToGoogle'
-import { authUserAction } from '../../store/actions/authUserAction'
+import ConnectToGoole from './SignIn/ConnectToGoogle'
+import SignOutFromAccount from './SignOut/SignOutFromAccount'
+import { constAuthUserActions } from '../../store/actions/constAuthUserActions'
 
 interface IAuthReducerProp {
   authReducer: {
@@ -13,17 +14,16 @@ interface IAuthReducerProp {
 const UserPanelOrAuth = (): JSX.Element => {
   const dispatch = useDispatch()
   const state = useSelector(({ authReducer }: IAuthReducerProp) => authReducer)
-
   return (
     <div>
       {state.userAuthOrNoAuth ? (
-        <div>Выйти</div>
+        <SignOutFromAccount />
       ) : state.isLoading ? (
         <ConnectToGoole />
       ) : (
         <button
           onClick={() => {
-            dispatch(authUserAction())
+            void constAuthUserActions.authLoading(dispatch)
           }}
         >
           Войти

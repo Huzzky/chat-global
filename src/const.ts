@@ -1,13 +1,17 @@
-const configConnect2Firebase = {
-  apiKey: 'AIzaSyCfVSoRfY2PAp3AEviqlnrAt0mQPvg5gqc',
-  authDomain: 'chat-react-task-test.firebaseapp.com',
-  databaseURL:
-    'https://chat-react-task-test-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'chat-react-task-test',
-  storageBucket: 'chat-react-task-test.appspot.com',
-  messagingSenderId: '569893010157',
-  appId: '1:569893010157:web:d987ccfc5b0298818d2ae4',
-  measurementId: 'G-F6NV99D66F',
-}
+const AUTH_USER_LOADING_GOOGLE_ACCOUNTS = 'AUTH_USER_LOADING_GOOGLE_ACCOUNTS'
+const AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT =
+  'AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT'
+const AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT =
+  'AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT'
+const AUTH_USER_SIGNOUT_FROM_ACCOUNT = 'AUTH_USER_SIGNOUT_FROM_ACCOUNT'
 
-export { configConnect2Firebase }
+const variableWithAuthUserAndSignOut = ['load', 'auth', 'error', 'signout']
+
+export { variableWithAuthUserAndSignOut }
+
+export {
+  AUTH_USER_LOADING_GOOGLE_ACCOUNTS,
+  AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
+  AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT,
+  AUTH_USER_SIGNOUT_FROM_ACCOUNT,
+}
