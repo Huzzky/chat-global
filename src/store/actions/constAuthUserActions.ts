@@ -6,8 +6,16 @@ import {
 } from '../../const'
 
 const constAuthUserActions = {
-  authSuccess(dispatch: Function) {
-    dispatch({ type: AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT })
+  authSuccess(
+    dispatch: Function,
+    userName: string | undefined | null,
+    userPhoto: string | undefined | null,
+  ) {
+    dispatch({
+      type: AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
+      userName: userName,
+      userPhoto: userPhoto,
+    })
   },
   authError(dispatch: Function) {
     dispatch({ type: AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT })

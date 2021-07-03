@@ -8,14 +8,20 @@ import {
 const initialState = {
   userAuthOrNoAuth: false,
   isLoading: false,
+  userName: '',
+  userPhoto: '',
 }
 
 export const authReducer = (
   state = initialState,
   {
     type,
+    userName,
+    userPhoto,
   }: {
     type: string
+    userName: string | undefined | null
+    userPhoto: string | undefined | null
   },
 ) => {
   switch (type) {
@@ -29,6 +35,8 @@ export const authReducer = (
         ...state,
         isLoading: false,
         userAuthOrNoAuth: true,
+        userName: userName,
+        userPhoto: userPhoto,
       }
     case AUTH_USER_SIGNOUT_FROM_ACCOUNT:
       return {

@@ -11,8 +11,10 @@ const ConnectToGoole = (): JSX.Element => {
     .auth()
     .signInWithPopup(provider)
     .then((result) => {
-      void console.log(result.user?.displayName)
-      void constAuthUserActions.authSuccess(dispatch)
+      const userName = result.user?.displayName
+      const userPhoto = result.user?.photoURL
+      console.log(result.user?.photoURL, userPhoto)
+      void constAuthUserActions.authSuccess(dispatch, userName, userPhoto)
     })
     .catch((_) => {
       void console.log('error')

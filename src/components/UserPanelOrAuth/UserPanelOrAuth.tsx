@@ -1,8 +1,10 @@
 import { memo } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import ConnectToGoole from './SignIn/ConnectToGoogle'
 import SignOutFromAccount from './SignOut/SignOutFromAccount'
-import { constAuthUserActions } from '../../store/actions/constAuthUserActions'
+import { InputBtnToAccount } from './SignIn/InputBtnToAccount'
+import UserPanel from './UserPanel/UserPanel'
+import styles from '../../assets/_UserPanelOrAuth.module.scss'
 
 interface IAuthReducerProp {
   authReducer: {
@@ -12,22 +14,18 @@ interface IAuthReducerProp {
 }
 
 const UserPanelOrAuth = (): JSX.Element => {
-  const dispatch = useDispatch()
   const state = useSelector(({ authReducer }: IAuthReducerProp) => authReducer)
   return (
-    <div>
+    <div className={styles.userPanel}>
       {state.userAuthOrNoAuth ? (
-        <SignOutFromAccount />
+        <>
+          <UserPanel />
+          <SignOutFromAccount />
+        </>
       ) : state.isLoading ? (
         <ConnectToGoole />
       ) : (
-        <button
-          onClick={() => {
-            void constAuthUserActions.authLoading(dispatch)
-          }}
-        >
-          Войти
-        </button>
+        <InputBtnToAccount classNameForStyle={styles} />
       )}
     </div>
   )
