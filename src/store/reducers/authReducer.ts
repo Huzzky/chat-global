@@ -8,8 +8,10 @@ import {
 const initialState = {
   userAuthOrNoAuth: false,
   isLoading: false,
-  userName: '',
-  userPhoto: '',
+  userName: 'Vladislav Bychkov',
+  userPhoto: 'http://cdn.onlinewebfonts.com/svg/download_159991.png',
+  userEmail: '',
+  userID: '',
 }
 
 export const authReducer = (
@@ -18,10 +20,14 @@ export const authReducer = (
     type,
     userName,
     userPhoto,
+    userEmail,
+    userID,
   }: {
     type: string
     userName: string | undefined | null
-    userPhoto: string | undefined | null
+    userPhoto: string
+    userEmail: string
+    userID: string
   },
 ) => {
   switch (type) {
@@ -37,6 +43,8 @@ export const authReducer = (
         userAuthOrNoAuth: true,
         userName: userName,
         userPhoto: userPhoto,
+        userEmail: userEmail,
+        userID: userID,
       }
     case AUTH_USER_SIGNOUT_FROM_ACCOUNT:
       return {

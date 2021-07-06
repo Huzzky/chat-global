@@ -7,11 +7,11 @@ interface IUserNameInStoreProp {
   }
 }
 
-const UserNameOnPanel = () => {
+const UserNameOnPanel = ({ className }: { className: string }) => {
   const userName = useSelector(
     ({ authReducer }: IUserNameInStoreProp) => authReducer.userName,
   )
-  return <p>{!userName ? 'Неизвестный' : userName}</p>
+  return <p className={className}>{!userName ? 'Неизвестный' : userName}</p>
 }
 
 export default memo(UserNameOnPanel)

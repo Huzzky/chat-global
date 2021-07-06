@@ -1,24 +1,25 @@
-import { connect, useDispatch } from 'react-redux'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import { useDispatch } from 'react-redux'
 import { memo } from 'react'
-import { constAuthUserActions } from '../../../store/actions/constAuthUserActions'
+import { signOutFromAccount } from '../../../api/signOutFromAccount'
 
-const SignOutFromAccount = (): JSX.Element => {
+const SignOutFromAccount = ({
+  className,
+}: {
+  className: { readonly [key: string]: string }
+}): JSX.Element => {
   const dispatch = useDispatch()
-  const func = (): void => {
-    void firebase
-      .auth()
-      .signOut()
-      .then((_) => {
-        void constAuthUserActions.authSignOut(dispatch)
-      })
-      .catch((_) => {
-        void constAuthUserActions.authError(dispatch)
-      })
+  const signOutFromAccountFuncInFuncComp = (): void => {
+    signOutFromAccount(dispatch)
   }
 
-  return <button onClick={() => void func()}>Выйти</button>
+  return (
+    <button
+      className={className.userPanel__signOutFromAccountBtn}
+      onClick={() => void signOutFromAccountFuncInFuncComp()}
+    >
+      Выйти
+    </button>
+  )
 }
 
-export default memo(connect()(SignOutFromAccount))
+export default memo(SignOutFromAccount)

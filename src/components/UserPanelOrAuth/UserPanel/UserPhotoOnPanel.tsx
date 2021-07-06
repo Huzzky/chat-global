@@ -7,11 +7,15 @@ interface IPhotoUserInStoreProp {
   }
 }
 
-const UserPhotoOnPanel = (): JSX.Element => {
+const UserPhotoOnPanel = ({
+  className,
+}: {
+  className: string
+}): JSX.Element => {
   const userPhoto = useSelector(
     ({ authReducer }: IPhotoUserInStoreProp) => authReducer.userPhoto,
   )
-  return <img src={userPhoto} alt="user"></img>
+  return <img className={className} src={userPhoto} alt="user"></img>
 }
 
 export default memo(UserPhotoOnPanel)

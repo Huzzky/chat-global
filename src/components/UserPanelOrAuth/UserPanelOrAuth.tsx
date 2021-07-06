@@ -1,6 +1,5 @@
 import { memo } from 'react'
-import { connect, useSelector } from 'react-redux'
-import ConnectToGoole from './SignIn/ConnectToGoogle'
+import { useSelector } from 'react-redux'
 import SignOutFromAccount from './SignOut/SignOutFromAccount'
 import { InputBtnToAccount } from './SignIn/InputBtnToAccount'
 import UserPanel from './UserPanel/UserPanel'
@@ -9,7 +8,6 @@ import styles from '../../assets/_UserPanelOrAuth.module.scss'
 interface IAuthReducerProp {
   authReducer: {
     userAuthOrNoAuth: boolean
-    isLoading: boolean
   }
 }
 
@@ -18,17 +16,15 @@ const UserPanelOrAuth = (): JSX.Element => {
   return (
     <div className={styles.userPanel}>
       {state.userAuthOrNoAuth ? (
-        <>
-          <UserPanel />
-          <SignOutFromAccount />
-        </>
-      ) : state.isLoading ? (
-        <ConnectToGoole />
+        <div className={styles.userPanel__containerUserPanel}>
+          <UserPanel className={styles} />
+          <SignOutFromAccount className={styles} />
+        </div>
       ) : (
-        <InputBtnToAccount classNameForStyle={styles} />
+        <InputBtnToAccount className={styles} />
       )}
     </div>
   )
 }
 
-export default memo(connect()(UserPanelOrAuth))
+export default memo(UserPanelOrAuth)

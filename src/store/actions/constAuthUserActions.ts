@@ -8,13 +8,16 @@ import {
 const constAuthUserActions = {
   authSuccess(
     dispatch: Function,
-    userName: string | undefined | null,
-    userPhoto: string | undefined | null,
+    profile: {
+      readonly [key: string]: string
+    },
   ) {
     dispatch({
       type: AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
-      userName: userName,
-      userPhoto: userPhoto,
+      userName: profile.name,
+      userEmail: profile.email,
+      userID: profile.id,
+      userPhoto: profile.picture,
     })
   },
   authError(dispatch: Function) {
