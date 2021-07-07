@@ -1,9 +1,8 @@
 import { memo } from 'react'
 import { useSelector } from 'react-redux'
-import SignOutFromAccount from './SignOut/SignOutFromAccount'
-import { InputBtnToAccount } from './SignIn/InputBtnToAccount'
-import UserPanel from './UserPanel/UserPanel'
 import styles from '../../assets/_UserPanelOrAuth.module.scss'
+import UserPanelContainer from './UserPanel/UserPanelContainer'
+import SignInContainter from './SignIn/SignInContainter'
 
 interface IAuthReducerProp {
   authReducer: {
@@ -14,16 +13,13 @@ interface IAuthReducerProp {
 const UserPanelOrAuth = (): JSX.Element => {
   const state = useSelector(({ authReducer }: IAuthReducerProp) => authReducer)
   return (
-    <div className={styles.userPanel}>
+    <header className={styles.userPanel}>
       {state.userAuthOrNoAuth ? (
-        <div className={styles.userPanel__containerUserPanel}>
-          <UserPanel className={styles} />
-          <SignOutFromAccount className={styles} />
-        </div>
+        <UserPanelContainer className={styles} />
       ) : (
-        <InputBtnToAccount className={styles} />
+        <SignInContainter styles={styles} />
       )}
-    </div>
+    </header>
   )
 }
 

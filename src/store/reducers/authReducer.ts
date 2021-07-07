@@ -1,6 +1,7 @@
 import {
   AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT,
   AUTH_USER_LOADING_GOOGLE_ACCOUNTS,
+  AUTH_USER_SAVE_DATA_ACCOUNT_IN_STORAGE,
   AUTH_USER_SIGNOUT_FROM_ACCOUNT,
   AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
 } from '../../const'
@@ -12,6 +13,7 @@ const initialState = {
   userPhoto: 'http://cdn.onlinewebfonts.com/svg/download_159991.png',
   userEmail: '',
   userID: '',
+  choiceSaveInStorage: false,
 }
 
 export const authReducer = (
@@ -22,12 +24,14 @@ export const authReducer = (
     userPhoto,
     userEmail,
     userID,
+    choiceSaveInStorage,
   }: {
     type: string
     userName: string | undefined | null
     userPhoto: string
     userEmail: string
     userID: string
+    choiceSaveInStorage: boolean
   },
 ) => {
   switch (type) {
@@ -57,6 +61,11 @@ export const authReducer = (
         ...state,
         isLoading: false,
         userAuthOrNoAuth: false,
+      }
+    case AUTH_USER_SAVE_DATA_ACCOUNT_IN_STORAGE:
+      return {
+        ...state,
+        choiceSaveInStorage: choiceSaveInStorage,
       }
     default:
       return state

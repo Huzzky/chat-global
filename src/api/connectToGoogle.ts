@@ -10,7 +10,7 @@ const connectToGoogle = (dispatch: Function) => {
     .signInWithPopup(provider)
     .then((result: any) => {
       const profile = result.additionalUserInfo.profile
-      void constAuthUserActions.authSuccess(dispatch, profile)
+      void constAuthUserActions.authSuccess(dispatch, profile, false)
     })
     .catch((_) => {
       void console.log('error')

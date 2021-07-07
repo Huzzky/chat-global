@@ -3,12 +3,18 @@
     width: 100%;
     grid-template-columns: repeat(10, 1fr);
     background-color: #52586e;
-    &__containerInputBtnToConnectOrExit {
+    &__containerSignIn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         grid-row: 1;
-        grid-column: 5 / 7;
+        grid-column: 4 / 8;
+    }
+    &__containerInputBtnToConnectOrExit {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-right: 1em;
     }
     &__inputBtnToConnect {
         display: flex;
@@ -36,6 +42,67 @@
             color: azure;
             cursor: pointer;
         }
+    }
+    &__checkboxContainer {
+        display: flex;
+        align-items: center;
+        height: 1.75em;
+        & label {
+            color: azure;
+        }
+        &__label {
+            transition: 0.35s ease;
+            -webkit-transition: 0.35s ease;
+            -moz-transition: 0.35s ease;
+            -ms-transition: 0.35s ease;
+            -o-transition: 0.35s ease;
+            background-color: azure;
+            border: 1px solid azure;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 20px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            height: 20px;
+            margin-right: 0.4em;
+            &:hover {
+                background-color: rgba(171, 191, 214, 0.4);
+            }
+        }
+        &__label:after {
+            border-left: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            border-top: none;
+            border-right: none;
+            content: "";
+            height: 6px;
+            opacity: 0;
+            position: relative;
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            width: 12px;
+            margin-bottom: 20%;
+        }
+    }
+    &__checkboxField:checked + &__checkboxContainer__label {
+        background-color: rgba(171, 191, 214, 0.4);
+        border: 1px solid azure;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__checkboxField:checked + &__checkboxContainer__label:after {
+        opacity: 1;
+    }
+    &__checkboxField {
+        visibility: hidden;
+        display: none;
+        font-size: 24px;
     }
     &__h1Loaded {
         grid-row: 1;
@@ -103,3 +170,13 @@
         color: azure;
     }
 }
+
+// @media screen and (max-width: 1500px) {
+//     .userPanel {
+//         &__checkboxContainer {
+//             & label {
+//                 font-size: 8px;
+//             }
+//         }
+//     }
+// }
