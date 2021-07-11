@@ -11,11 +11,7 @@ const constAuthUserActions = {
     profile: {
       readonly [key: string]: string
     },
-    choiceSaveInStorage: boolean,
   ) {
-    if (choiceSaveInStorage) {
-    } else {
-    }
     dispatch({
       type: AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
       userName: profile.name,

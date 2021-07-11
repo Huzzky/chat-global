@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import CheckboxForChoiceSaveAccountInCookies from './CheckboxForChoiceSaveAccountInStorage'
 import { InputBtnToAccount } from './InputBtnToAccount'
 
 const SignInContainter = ({
@@ -10,7 +9,6 @@ const SignInContainter = ({
   return (
     <div className={styles.userPanel__containerSignIn}>
       <InputBtnToAccount className={styles} />
-      <CheckboxForChoiceSaveAccountInCookies className={styles} />
     </div>
   )
 }
