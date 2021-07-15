@@ -1,12 +1,12 @@
 import { memo } from 'react'
-import { useEffectOnce } from 'react-use'
-import { setDataFrom } from '../../api/connectToDBStatic'
+import ChatField from './ChatField/ChatField'
 
 const ChatPage = () => {
-  useEffectOnce(() => {
-    // setDataFrom()
-  })
-  return <div></div>
+  return (
+    <div>
+      <ChatField />
+    </div>
+  )
 }
 
 export default memo(ChatPage)

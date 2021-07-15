@@ -3,46 +3,77 @@ import 'firebase/analytics'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/database'
+import { LOAD_MESSAGES_TO_STORE_SUCCESS } from '../const'
 
-// const getDataFromCloudFirebase = () => {
-//   // обращение к статичной бд
-//   let db = firebase.firestore()
-//   // поиск коллекции chat-global в бд
-//   db.collection('chat-global')
-//     // запрос
-//     .get()
-//     // после получения обработка
-//     .then((querySnapshot: any) => {
-//       console.log(querySnapshot.exists)
-//       // вывод
-//       querySnapshot.forEach((doc: any) => {
-//         if (doc.exists) {
-//           console.log(doc.data())
-//         } else {
-//           console.log('123')
-//         }
-//       })
-//     })
-// }
-
-const setDataFrom = () => {
+const setDataFrom = (
+  userEmail: string,
+  userTimeInput: number,
+  userUUID4: string,
+  userName: string,
+) => {
+  // запрос к базе данных
   let db = firebase.firestore()
+  // запрос к коллекции и добавлении данных
   db.collection('chat-global').add({
-    userEmail: 'vladislav.bychkov01@gmail.com',
-    userTimeInput: 1626044129151,
-    userUUID4: '6afbbee9-3249-4a12-b44f-86484a1481fa',
+    // Имя пользователя
+    userEmail: userEmail,
+    // время нажатия на кнопку отправки
+    userTimeInput: userTimeInput,
+    // UUID
+    userUUID4: userUUID4,
+    // Имя пользователя
+    userName: userName,
   })
 }
 
-const getDataFromCloudFirebase = () => {
-  let db = firebase.firestore()
-  db.collection('chat-global').onSnapshot((querySnapshot) => {
-    let messages: Array<any> = []
-    querySnapshot.forEach((doc) => {
-      messages.push(doc.data())
+async function getDataFromCloudFirebase() {
+  let promise = new Promise((resolve) => {
+    // запрос к базе данных
+    let db = firebase.firestore()
+    // запрос к коллекции и начало прослушивание данных
+    db.collection('chat-global').onSnapshot((querySnapshot) => {
+      // создание переменной для массива данных
+      let messages: Array<{}> | undefined = []
+      // перебор данных в массиве
+      querySnapshot.forEach((doc) => {
+        // Если данных нет, то пустой массив
+        if (!messages) {
+          messages = []
+        } else {
+          // добавление в массив данных с сервера
+          messages.push(doc.data())
+        }
+      })
+      // ! добавление данных с сервера в хранилище
+      resolve(messages)
     })
-    console.log(messages)
+  })
+  return promise
+}
+
+const getDataFromCloudFirebase2 = (dispatch: Function) => {
+  // запрос к базе данных
+  let db = firebase.firestore()
+  // запрос к коллекции и начало прослушивание данных
+  db.collection('chat-global').onSnapshot((querySnapshot) => {
+    // создание переменной для массива данных
+    let messages: Array<{}> | undefined = []
+    // перебор данных в массиве
+    querySnapshot.forEach((doc) => {
+      // Если данных нет, то пустой массив
+      if (!messages) {
+        messages = []
+      } else {
+        // добавление в массив данных с сервера
+        messages.push(doc.data())
+      }
+    })
+    // ! добавление данных с сервера в хранилище
+    dispatch({
+      type: LOAD_MESSAGES_TO_STORE_SUCCESS,
+      dataMessages: messages,
+    })
   })
 }
 
-export { getDataFromCloudFirebase, setDataFrom }
+export { getDataFromCloudFirebase, setDataFrom, getDataFromCloudFirebase2 }
