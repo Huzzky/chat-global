@@ -55,6 +55,10 @@ export const authReducer = (
         ...state,
         isLoading: false,
         userAuthOrNoAuth: false,
+        userName: '',
+        userPhoto: '',
+        userEmail: '',
+        userID: '',
       }
     case AUTH_USER_ERROR_WITH_GOOGLE_ACCOUNT:
       return {
