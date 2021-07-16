@@ -3,9 +3,9 @@ import ChatField from './ChatField/ChatField'
 
 const ChatPage = () => {
   return (
-    <div>
+    <main>
       <ChatField />
-    </div>
+    </main>
   )
 }
 

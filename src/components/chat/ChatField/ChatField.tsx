@@ -1,15 +1,41 @@
 import { memo } from 'react'
-import { useEffectOnce } from 'react-use'
-import { useDispatch } from 'react-redux'
-// import { constMessagesLoadToStore } from '../../../store/actions/constMessagesLoadToStore'
-import { getDataFromCloudFirebase2 } from '../../../api/connectToDBStatic'
-const ChatField = () => {
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffectOnce, useNetworkState } from 'react-use'
+import { getDataFromCloudFirebase } from '../../../api/connectToDBStatic'
+
+import { constMessagesLoadToStore } from '../../../store/actions/constMessagesLoadToStore'
+import ChatFieldMessage from './ChatFieldMessage'
+
+interface IChatReducerProp {
+  chatReducer: {
+    isLoadingMessages: boolean
+    isErrorLoadingMessages: boolean
+  }
+}
+
+const ChatField = (): JSX.Element => {
+  const stateNetwork: {} | any = useNetworkState()
   const dispatch = useDispatch()
+  const state = useSelector(({ chatReducer }: IChatReducerProp) => chatReducer)
   useEffectOnce(() => {
-    // constMessagesLoadToStore.loadMessagesToStore(dispatch)
-    getDataFromCloudFirebase2(dispatch)
+    // Вызов загрузки в store и для отображения в UI
+    void constMessagesLoadToStore.loadMessagesToStore(dispatch)
+    void getDataFromCloudFirebase(dispatch)
   })
-  return <div></div>
+
+  return !stateNetwork.online ? (
+    <h1>Ошибка соединения</h1>
+  ) : (
+    <div>
+      {state.isErrorLoadingMessages ? (
+        <h1>Соединения нет</h1>
+      ) : state.isLoadingMessages ? (
+        <h1>Загрузка</h1>
+      ) : (
+        <ChatFieldMessage />
+      )}
+    </div>
+  )
 }
 
 export default memo(ChatField)

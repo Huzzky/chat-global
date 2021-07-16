@@ -9,8 +9,8 @@ import {
 const initialState = {
   userAuthOrNoAuth: false,
   isLoading: false,
-  userName: 'Vladislav Bychkov',
-  userPhoto: 'http://cdn.onlinewebfonts.com/svg/download_159991.png',
+  userName: '',
+  userPhoto: '',
   userEmail: '',
   userID: '',
   choiceSaveInStorage: false,
