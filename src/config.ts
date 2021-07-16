@@ -10,4 +10,8 @@ const configConnect2Firebase = {
   measurementId: 'G-F6NV99D66F',
 }
 
-export { configConnect2Firebase }
+const keyAmount = () => {
+  return 'chat-global'
+}
+
+export { configConnect2Firebase, keyAmount }
