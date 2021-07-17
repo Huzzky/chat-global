@@ -1,9 +1,7 @@
-import { keyAmount } from '../config'
-
-const encode = (text: string): string => {
+const encode = (text: string, keyCode: string) => {
   let j: number = 0
   let str: string = ''
-  let key: string = utf8_encode(keyAmount())
+  let key: string = utf8_encode(keyCode)
   text = utf8_encode(text)
   for (let i: number = 0; i < text.length; i++) {
     let a: number = text.charCodeAt(i)

@@ -1,10 +1,9 @@
-import { keyAmount } from '../config'
 import { utf8_encode } from './cipherEncode'
 
-const decode = (text: string): string => {
+const decode = (text: string, keyCode: string) => {
   let j: number = 0
   let str: string = ''
-  let key: string = utf8_encode(keyAmount())
+  let key = utf8_encode(keyCode)
   text = window.atob(text)
   for (let i: number = 0; i < text.length; i++) {
     let a: number = text.charCodeAt(i)

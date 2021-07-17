@@ -1,8 +1,3 @@
-import 'firebase/app'
-import 'firebase/analytics'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/database'
 import firebase from 'firebase'
 
 import { constMessagesLoadToStore } from '../store/actions/constMessagesLoadToStore'
@@ -12,6 +7,7 @@ const setDataFrom = (
   userTimeInput: number,
   userUUID4: string,
   userName: string,
+  userMessage: string,
 ) => {
   const db = firebase.firestore()
   // запрос к базе данных
@@ -25,27 +21,8 @@ const setDataFrom = (
     userUUID4: userUUID4,
     // Имя пользователя
     userName: userName,
+    userMessage: userMessage,
   })
-}
-
-const getCipherCode = () => {
-  const db: any = firebase.firestore()
-  let docRef: any = db.collection('cipherCode').doc('CipherCode')
-
-  docRef
-    .get()
-    .then((doc: any) => {
-      if (doc.exists) {
-        return doc.data().cipher
-      } else {
-        console.log('СРОЧНО НАПИШИТЕ РАЗРАБОТЧКУ')
-        return 'Error 404'
-      }
-    })
-    .catch((error: string) => {
-      console.log('СРОЧНО НАПИШИТЕ РАЗРАБОТЧКУ')
-      return 'Error 404'
-    })
 }
 
 const getDataFromCloudFirebase = (dispatch: Function) => {
@@ -75,4 +52,4 @@ const getDataFromCloudFirebase = (dispatch: Function) => {
   })
 }
 
-export { getDataFromCloudFirebase, setDataFrom, getCipherCode }
+export { getDataFromCloudFirebase, setDataFrom }

@@ -4,6 +4,8 @@ import { useEffectOnce, useNetworkState } from 'react-use'
 import { getDataFromCloudFirebase } from '../../../api/connectToDBStatic'
 
 import { constMessagesLoadToStore } from '../../../store/actions/constMessagesLoadToStore'
+import { decode } from '../../../utils/cipherDecode'
+import { encode } from '../../../utils/cipherEncode'
 import ChatFieldMessage from './ChatFieldMessage'
 
 interface IChatReducerProp {
@@ -21,6 +23,10 @@ const ChatField = (): JSX.Element => {
     // Вызов загрузки в store и для отображения в UI
     void constMessagesLoadToStore.loadMessagesToStore(dispatch)
     void getDataFromCloudFirebase(dispatch)
+    // void getCipherCode().then((data: string) => {
+    //   console.log(encode('Vladislav', data))
+    //   console.log(decode('udTC2Jba2NDY', data))
+    // })
   })
 
   return !stateNetwork.online ? (
