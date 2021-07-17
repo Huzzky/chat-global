@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux'
 
 interface IChatFieldReducerProp {
   chatReducer: {
-    dataMessages: Array<{}>
+    dataMessages: Array<{
+      userMessage: string
+      userName: string
+      userTimeInput: number
+    }>
   }
 }
 
@@ -29,9 +33,21 @@ const ChatFieldMessage = () => {
           value.userEmail === stateUser.userEmail &&
           value.userUUID4 === stateUser.userID
         ) {
-          return <h1 key={index}>{value.userName} + 123</h1>
+          return (
+            <div key={index}>
+              <h1>{value.userMessage} + 123</h1>
+            </div>
+          )
         } else {
-          return <h1 key={index}>{value.userName}</h1>
+          return (
+            <div key={index}>
+              <div>
+                <p>{value.userName}</p>
+                <p>{new Date(value.userTimeInput).toLocaleString()}</p>
+              </div>
+              <h1>{value.userMessage}</h1>
+            </div>
+          )
         }
       })}
     </div>

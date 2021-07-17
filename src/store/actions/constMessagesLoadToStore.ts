@@ -13,7 +13,7 @@ const constMessagesLoadToStore = {
   successLoadMessages: (dispatch: Function, data: Array<{}>) => {
     dispatch({
       type: LOAD_MESSAGES_TO_STORE_SUCCESS,
-      dataMessages: data,
+      dataMessages: data.reverse(),
     })
   },
   errorConnectWithDB: (dispatch: Function) => {

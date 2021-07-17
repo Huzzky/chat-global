@@ -28,6 +28,26 @@ const setDataFrom = (
   })
 }
 
+const getCipherCode = () => {
+  const db: any = firebase.firestore()
+  let docRef: any = db.collection('cipherCode').doc('CipherCode')
+
+  docRef
+    .get()
+    .then((doc: any) => {
+      if (doc.exists) {
+        return doc.data().cipher
+      } else {
+        console.log('СРОЧНО НАПИШИТЕ РАЗРАБОТЧКУ')
+        return 'Error 404'
+      }
+    })
+    .catch((error: string) => {
+      console.log('СРОЧНО НАПИШИТЕ РАЗРАБОТЧКУ')
+      return 'Error 404'
+    })
+}
+
 const getDataFromCloudFirebase = (dispatch: Function) => {
   // запрос к базе данных
   const db = firebase.firestore()
@@ -55,4 +75,4 @@ const getDataFromCloudFirebase = (dispatch: Function) => {
   })
 }
 
-export { getDataFromCloudFirebase, setDataFrom }
+export { getDataFromCloudFirebase, setDataFrom, getCipherCode }
