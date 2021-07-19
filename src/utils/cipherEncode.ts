@@ -1,30 +1,32 @@
-const encode = (text: string, keyCode: string) => {
-  let j: number = 0
-  let str: string = ''
-  let key: string = utf8_encode(keyCode)
-  text = utf8_encode(text)
-  for (let i: number = 0; i < text.length; i++) {
-    let a: number = text.charCodeAt(i)
-    let b: number = key.charCodeAt(j)
-    let c: number = a + b
-    if (c > 255) c -= 255
-    str += String.fromCharCode(c)
-    if (j === key.length - 1) j = 0
-    else j++
+const encode = (_x116120116S: string, _x107099SS: string) => {
+  // кодирование данных
+  let _x106N: number = 0
+  let _x115S: string = ''
+  let _x107S: string = utf8_encode(_x107099SS)
+  _x116120116S = utf8_encode(_x116120116S)
+  for (let _x105N: number = 0; _x105N < _x116120116S.length; _x105N++) {
+    let _x97N: number = _x116120116S.charCodeAt(_x105N)
+    let _x98N: number = _x107S.charCodeAt(_x106N)
+    let _x099N: number = _x97N + _x98N
+    if (_x099N > 255) _x099N -= 255
+    _x115S += String.fromCharCode(_x099N)
+    if (_x106N === _x107S.length - 1) _x106N = 0
+    else _x106N++
   }
-  return window.btoa(str)
+  return window.btoa(_x115S)
 }
 
-const utf8_encode = (text: string): string => {
-  let str: string = ''
-  for (let i = 0; i < text.length; i++) {
-    if (text.charCodeAt(i) > 255) {
-      str += String.fromCharCode(text.charCodeAt(i) - 848)
+const utf8_encode = (_x116120116S: string): string => {
+  // Грубое кодированние
+  let _x115S: string = ''
+  for (let _x105N = 0; _x105N < _x116120116S.length; _x105N++) {
+    if (_x116120116S.charCodeAt(_x105N) > 255) {
+      _x115S += String.fromCharCode(_x116120116S.charCodeAt(_x105N) - 848)
     } else {
-      str += text.charAt(i)
+      _x115S += _x116120116S.charAt(_x105N)
     }
   }
-  return str
+  return _x115S
 }
 
 export { encode, utf8_encode }

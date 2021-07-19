@@ -25,16 +25,20 @@ const setDataFrom = (
   })
 }
 
-const getDataFromCloudFirebase = (dispatch: Function) => {
+const getDataFromCloudFirebase = (
+  dispatch: Function,
+  lengthDataMessages: number,
+) => {
   // запрос к базе данных
   const db = firebase.firestore()
   // запрос к коллекции и начало прослушивание данных
-  db.collection('chat-global').onSnapshot((snapshot: any) => {
-    if (snapshot.metadata.fromCache === true) {
-      constMessagesLoadToStore.errorConnectWithDB(dispatch)
-    } else if (snapshot.metadata.fromCache === false) {
+  db.collection('chat-global')
+    // лимит на 20 сообщений
+    .limit(lengthDataMessages + 20)
+    // начало прослушивания
+    .onSnapshot((snapshot: any) => {
       // создание переменной для массива данных
-      let messages: Array<{}> | undefined = []
+      let messages: Array<object> = []
       // перебор данных в массиве
       snapshot.forEach((doc: any) => {
         // Если данных нет, то пустой массив
@@ -45,11 +49,9 @@ const getDataFromCloudFirebase = (dispatch: Function) => {
           messages.push(doc.data())
         }
       })
+      // диспатч --> экшн о появлении сообщений --> добавление в store данных
       constMessagesLoadToStore.successLoadMessages(dispatch, messages)
-
-      // ! добавление данных с сервера в хранилище
-    }
-  })
+    })
 }
 
 export { getDataFromCloudFirebase, setDataFrom }

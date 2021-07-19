@@ -10,7 +10,6 @@ interface IChatFieldReducerProp {
     }>
   }
 }
-
 interface IUserReducerProp {
   authReducer: {
     userEmail: string
@@ -35,6 +34,10 @@ const ChatFieldMessage = () => {
         ) {
           return (
             <div key={index}>
+              <div>
+                <p>You ({value.userName})</p>
+                <p>{new Date(value.userTimeInput).toLocaleString()}</p>
+              </div>
               <h1>{value.userMessage} + 123</h1>
             </div>
           )
