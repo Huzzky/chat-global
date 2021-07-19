@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { useSelector } from 'react-redux'
+import { MessageField } from '../Messages/MessageField/MessageField'
 
 interface IChatFieldReducerProp {
   chatReducer: {
@@ -32,25 +33,9 @@ const ChatFieldMessage = () => {
           value.userEmail === stateUser.userEmail &&
           value.userUUID4 === stateUser.userID
         ) {
-          return (
-            <div key={index}>
-              <div>
-                <p>You ({value.userName})</p>
-                <p>{new Date(value.userTimeInput).toLocaleString()}</p>
-              </div>
-              <h1>{value.userMessage} + 123</h1>
-            </div>
-          )
+          return <MessageField index={index} value={value} itsUser={true} />
         } else {
-          return (
-            <div key={index}>
-              <div>
-                <p>{value.userName}</p>
-                <p>{new Date(value.userTimeInput).toLocaleString()}</p>
-              </div>
-              <h1>{value.userMessage}</h1>
-            </div>
-          )
+          return <MessageField index={index} value={value} itsUser={false} />
         }
       })}
     </div>
