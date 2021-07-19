@@ -6,7 +6,7 @@ import {
   AUTH_USER_SUCCESS_WITH_GOOGLE_ACCOUNT,
 } from '../../const'
 
-const initialState = {
+const initialState: object = {
   userAuthOrNoAuth: false,
   isLoading: false,
   userName: '',
@@ -14,6 +14,15 @@ const initialState = {
   userEmail: '',
   userID: '',
   choiceSaveInStorage: false,
+}
+
+type IAuthReducerProps = {
+  type: string
+  userName: string | undefined | null
+  userPhoto: string
+  userEmail: string
+  userID: string
+  choiceSaveInStorage: boolean
 }
 
 export const authReducer = (
@@ -25,14 +34,7 @@ export const authReducer = (
     userEmail,
     userID,
     choiceSaveInStorage,
-  }: {
-    type: string
-    userName: string | undefined | null
-    userPhoto: string
-    userEmail: string
-    userID: string
-    choiceSaveInStorage: boolean
-  },
+  }: IAuthReducerProps,
 ) => {
   switch (type) {
     case AUTH_USER_LOADING_GOOGLE_ACCOUNTS:

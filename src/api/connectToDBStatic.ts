@@ -2,7 +2,7 @@ import firebase from 'firebase'
 
 import { constMessagesLoadToStore } from '../store/actions/constMessagesLoadToStore'
 
-const setDataFrom = (
+const setDataFrom: Function = (
   userEmail: string,
   userTimeInput: number,
   userUUID4: string,
@@ -25,7 +25,7 @@ const setDataFrom = (
   })
 }
 
-const getDataFromCloudFirebase = (
+const getDataFromCloudFirebase: Function = (
   dispatch: Function,
   lengthDataMessages: number,
 ) => {

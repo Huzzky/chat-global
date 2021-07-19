@@ -2,8 +2,8 @@ import { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffectOnce, useNetworkState } from 'react-use'
 import { getDataFromCloudFirebase } from '../../../api/connectToDBStatic'
+import { loadMessagesToStore } from '../../../store/actions/constMessagesLoadToStore'
 
-import { constMessagesLoadToStore } from '../../../store/actions/constMessagesLoadToStore'
 // import { decode } from '../../../utils/cipherDecode'
 // import { encode } from '../../../utils/cipherEncode'
 import ChatFieldMessage from './ChatFieldMessage'
@@ -16,13 +16,14 @@ interface IChatReducerProp {
   }
 }
 
-const ChatField = (): JSX.Element => {
+const ChatField: React.FunctionComponent<unknown> = (): JSX.Element => {
   const stateNetwork: {} | any = useNetworkState()
   const dispatch = useDispatch()
   const state = useSelector(({ chatReducer }: IChatReducerProp) => chatReducer)
+
   useEffectOnce(() => {
     // Вызов загрузки в store и для отображения в UI
-    void constMessagesLoadToStore.loadMessagesToStore(dispatch)
+    void loadMessagesToStore(dispatch)
     void getDataFromCloudFirebase(dispatch, state.dataMessages.length)
     // void getCipherCode().then((data: string) => {
     //   console.log(encode('Vladislav', data))

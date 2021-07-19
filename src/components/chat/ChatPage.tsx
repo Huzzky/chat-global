@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import ChatField from './ChatField/ChatField'
 
-const ChatPage = () => {
+const ChatPage: React.FunctionComponent<unknown> = (): JSX.Element => {
   return (
     <main>
       <ChatField />

@@ -4,21 +4,20 @@ import {
   LOAD_MESSAGES_TO_STORE_SUCCESS,
 } from '../../const'
 
-const initialState = {
+const initialState: object = {
   isLoadingMessages: false,
   isErrorLoadingMessages: false,
   dataMessages: [],
 }
 
+type IChatReducerProps = {
+  type: string
+  dataMessages: Array<{}>
+}
+
 export const chatReducer = (
   state = initialState,
-  {
-    type,
-    dataMessages,
-  }: {
-    type: string
-    dataMessages: Array<{}>
-  },
+  { type, dataMessages }: IChatReducerProps,
 ) => {
   switch (type) {
     case LOAD_MESSAGES_TO_STORE_REQUEST:

@@ -12,7 +12,7 @@ type MessageFieldProps = {
   itsUser: boolean
 }
 
-export const MessageField = ({
+export const MessageField: React.FunctionComponent<MessageFieldProps> = ({
   index,
   value,
   itsUser,

@@ -18,7 +18,7 @@ interface IUserReducerProp {
   }
 }
 
-const ChatFieldMessage = () => {
+const ChatFieldMessage: React.FunctionComponent<unknown> = () => {
   const stateMessages = useSelector(
     ({ chatReducer }: IChatFieldReducerProp) => chatReducer,
   )

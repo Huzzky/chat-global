@@ -2,20 +2,23 @@ import { useDispatch } from 'react-redux'
 import { memo } from 'react'
 import { signOutFromAccount } from '../../../api/signOutFromAccount'
 
-const SignOutFromAccount = ({
-  className,
-}: {
+type ISignOutFromAccountProps = {
   className: { readonly [key: string]: string }
-}): JSX.Element => {
+}
+
+const SignOutFromAccount: React.FunctionComponent<ISignOutFromAccountProps> = ({
+  className,
+}: ISignOutFromAccountProps): JSX.Element => {
   const dispatch = useDispatch()
-  const signOutFromAccountFuncInFuncComp = (): void => {
-    signOutFromAccount(dispatch)
+
+  const _signOutFromAccountFuncInFuncComp: Function = (): void => {
+    void signOutFromAccount(dispatch)
   }
 
   return (
     <button
       className={className.userPanel__signOutFromAccountBtn}
-      onClick={() => void signOutFromAccountFuncInFuncComp()}
+      onClick={() => _signOutFromAccountFuncInFuncComp()}
     >
       Выйти
     </button>

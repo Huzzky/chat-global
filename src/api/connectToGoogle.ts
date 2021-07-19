@@ -1,8 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { constAuthUserActions } from '../store/actions/constAuthUserActions'
+import { authError, authSuccess } from '../store/actions/constAuthUserActions'
 
-const connectToGoogle = (dispatch: Function) => {
+const connectToGoogle: Function = (dispatch: Function) => {
   // подключение к Google провайдеру
   let provider = new firebase.auth.GoogleAuthProvider()
 
@@ -17,11 +17,11 @@ const connectToGoogle = (dispatch: Function) => {
       // берем данные пользователя
       const profile = result.additionalUserInfo.profile
       // диспатч экшена с данными
-      void constAuthUserActions.authSuccess(dispatch, profile)
+      void authSuccess(dispatch, profile)
     })
     .catch((_) => {
-      void console.log('error')
-      void constAuthUserActions.authError(dispatch)
+      void console.error('Что-то не так с вашим аккаунтом или со связью')
+      void authError(dispatch)
     })
 }
 

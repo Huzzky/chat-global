@@ -1,16 +1,16 @@
-import { constAuthUserActions } from '../store/actions/constAuthUserActions'
+import { authError, authSignOut } from '../store/actions/constAuthUserActions'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-const signOutFromAccount = (dispatch: Function) => {
+const signOutFromAccount: Function = (dispatch: Function) => {
   void firebase
     .auth()
     .signOut()
     .then((_) => {
-      void constAuthUserActions.authSignOut(dispatch)
+      void authSignOut(dispatch)
     })
     .catch((_) => {
-      void constAuthUserActions.authError(dispatch)
+      void authError(dispatch)
     })
 }
 

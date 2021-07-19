@@ -10,7 +10,7 @@ interface IAuthReducerProp {
   }
 }
 
-const UserPanelOrAuth = (): JSX.Element => {
+const UserPanelOrAuth: React.FunctionComponent<any> = (): JSX.Element => {
   const state = useSelector(({ authReducer }: IAuthReducerProp) => authReducer)
   return (
     <header className={styles.userPanel}>

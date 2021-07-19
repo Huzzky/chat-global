@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-const getCipherCode = () => {
+const getCipherCode: Function = (): Promise<any> => {
   const db: any = firebase.firestore()
   let docRef: any = db.collection('cipherCode').doc('CipherCode')
 
